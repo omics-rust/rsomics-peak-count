@@ -39,7 +39,9 @@ impl Tool for Cli {
         } else {
             Box::new(std::fs::File::create(&self.output).map_err(RsomicsError::Io)?)
         };
-        let total = peak_counts(&self.bam, &self.bed, &mut out, self.min_mapq)?;
+        let workers = std::num::NonZero::new(self.common.thread_count())
+            .unwrap_or(std::num::NonZero::<usize>::MIN);
+        let total = peak_counts(&self.bam, &self.bed, &mut out, self.min_mapq, workers)?;
         if !self.common.quiet {
             eprintln!("{total} reads counted in peaks");
         }
