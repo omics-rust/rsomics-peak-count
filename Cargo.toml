@@ -23,5 +23,13 @@ rsomics-help = { version = "0.3" }
 rsomics-intervals = { version = "0.1" }
 rsomics-bamio = { version = "0.1" }
 clap = { version = "4", features = ["derive"] }
-noodles = { version = "0.110", features = ["sam", "bam"]  }
+noodles = { version = "0.110", features = ["sam", "bam"] }
+
+[dev-dependencies]
+criterion = { version = "0.7", default-features = false, features = ["cargo_bench_support"] }
+tempfile = "3"
+
+[[bench]]
+name = "bench"
+harness = false
 
