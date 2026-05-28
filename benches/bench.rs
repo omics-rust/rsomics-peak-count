@@ -12,11 +12,7 @@ fn bench_peak_count(c: &mut Criterion) {
     c.bench_function("rsomics-peak-count golden", |b| {
         b.iter(|| {
             let out = Command::new(black_box(bin))
-                .args([
-                    bam.to_str().unwrap(),
-                    "--bed",
-                    bed.to_str().unwrap(),
-                ])
+                .args([bam.to_str().unwrap(), "--bed", bed.to_str().unwrap()])
                 .output()
                 .unwrap();
             assert!(out.status.success());
